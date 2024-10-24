@@ -83,6 +83,10 @@ void* clockNuestro(){
 int main(int argc, char** argv) {
     srand(time(NULL));
 
+    if (argc == 1){
+        printf("tienes que meter un argumento melon");
+        exit(1);
+    }
     float frequencia = atof(argv[1]);
     pthread_t relojThread, timerThread, procesoThread;
 
