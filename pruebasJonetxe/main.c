@@ -1,4 +1,5 @@
 #include <math.h>
+#include <linux/sched.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
@@ -7,7 +8,7 @@
 
 // void scheduler_call();
 // Estructura para el PCB (Process Control Block)
-typedef struct PCB {
+typedef struct task_struct {
     int pid;                // Identificador del proceso
     struct PCB *siguiente;  // Puntero al siguiente proceso en la cola
 } PCB;
@@ -25,15 +26,18 @@ void* scheduler(void* threadid){
     while (1) {
         pthread_mutex_lock(&mutex);
         pthread_cond_wait(&cond2, &mutex);
-        static int index = 0;
-        if (index >= num_processes) {
-            pthread_mutex_unlock(&mutex);
-            break;
-        }
-        PCB p = colaProcesos[index++];
-        pthread_mutex_unlock(&mutex);
+        int index = 0;
+        while( index < num_processes){
+            if (index >= num_processes) {
+                pthread_mutex_unlock(&mutex);
+                break;
+            }
+            PCB p = colaProcesos[index];
 
-        printf("Un thread #%ld está ejecutando el proceso #%d\n", tid, p.pid);
+            printf("Un thread #%ld está ejecutando el proceso #%d\n", tid, p.pid);
+            index++;
+        }
+        pthread_mutex_unlock(&mutex);
         sleep(3); // simulación de la duración del proceso
     }
     pthread_exit(NULL);
@@ -47,11 +51,18 @@ void* generarProcesos(void* arg) {
         PCB *nuevoProceso = (PCB*)malloc(sizeof(PCB));
         nuevoProceso->pid = rand() % 1000;
         nuevoProceso->siguiente = NULL;
-        num_processes++;
         pthread_mutex_lock(&mutex);
+        num_processes++;
         nuevoProceso->siguiente = colaProcesos;
         colaProcesos = nuevoProceso;
         printf("Generado proceso con PID %d\n", nuevoProceso->pid);
+        
+        PCB *temp = colaProcesos;
+        printf("Lista de procesos:\n");
+        while (temp != NULL) {
+            printf("PID %d\n", temp->pid);
+            temp = temp->siguiente;
+        }
         pthread_mutex_unlock(&mutex);
     }
     return NULL;
