@@ -33,7 +33,7 @@ void* scheduler(void* threadid){
         PCB p = colaProcesos[index++];
         pthread_mutex_unlock(&mutex);
 
-        printf("Thread #%ld está ejecutando el proceso #%d\n", tid, p.pid);
+        printf("Un thread #%ld está ejecutando el proceso #%d\n", tid, p.pid);
         sleep(3); // simulación de la duración del proceso
     }
     pthread_exit(NULL);
