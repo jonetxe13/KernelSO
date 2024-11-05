@@ -3,12 +3,23 @@
 typedef struct task_struct {
     int pid;                // Identificador del proceso
     struct task_struct *siguiente;  // Puntero al siguiente proceso en la cola
+    int tiempoVida;
 } PCB;
 
 typedef struct { 
-    pthread_t thread; 
     int id; 
+    PCB process; 
 } Thread;
+
+typedef struct { 
+    int id; 
+    Thread threads[];
+} Core;
+
+typedef struct { 
+    int id; 
+    Core cores[];
+} CPU;
 
 typedef struct { 
     Thread* threads; 
