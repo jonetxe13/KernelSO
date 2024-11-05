@@ -20,31 +20,39 @@ void* scheduler(void* args){
         while (temp != NULL) { 
             int *pid_copy = malloc(sizeof(int)); 
             *pid_copy = temp->pid; 
-            if (threadNum < num_threads) { 
-                    printf("Scheduler: Created thread %d for process %d\n", threadNum, temp->pid); 
-                    int quantum = 3;
-                    threadArray[threadNum].process = *temp;
-                    for(int i = 0; i < num_threads; i++){
-                        if(threadArray[i].process.tiempoVida > quantum){
-                            threadArray[i].process.tiempoVida-=quantum;   
-                            threadArray[i+1].process.tiempoVida-=quantum;   
-                            for(int i = 0; i < 10; i++){
-                                if( colaProcesos->siguiente == NULL){
-                                    colaProcesos = *threadArray[i].process;
-                                }
-                                else{
-                                    
-                                }
+            if (threadNum < num_threads) {
+                 printf("Scheduler: Created thread %d for process %d\n", threadNum, temp->pid);
+                 int quantum = 3;
+                 threadArray[threadNum].process = *temp;
+
+                 while (temp != NULL) {
+                    for (int i = 0; i < num_threads; i++) {
+                        if (threadArray[i].process.tiempoVida > 0) {
+                            if (threadArray[i].process.tiempoVida > quantum) {
+                                threadArray[i].process.tiempoVida -= quantum;
+                                printf("Proceso %d ejecutado %d segundos\n", threadArray[i].process.pid, quantum);
+                            } else {
+                                printf("Proceso %d ejecutado %d tiempo ha finalizado\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida);
+                                threadArray[i].process.tiempoVida = 0;
                             }
-                        }
-                        else {
-                            threadArray[i].process = NULL;
+                            // Simula la acción de la CPU
+                            usleep(quantum * 1000);
                         }
                     }
-                    threadNum++; 
-                    temp = temp->siguiente; 
-                    colaProcesos = colaProcesos->siguiente;
-            } 
+                    // Avanza al siguiente proceso
+                    temp = temp->siguiente;
+                 }
+
+    // Limpiar procesos terminados
+    for (int i = 0; i < num_threads; i++) {
+        if (threadArray[i].process.tiempoVida == 0) {
+            // Manejar el proceso terminado
+            printf("Scheduler: Process %d has completed execution\n", threadArray[i].process.pid);
+        }
+    }
+
+    threadNum++;
+ }
             free(pid_copy);
         } 
         if (threadNum == num_threads) { 
