@@ -6,30 +6,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+// #include "clock.c"
+#include "globales.h"
 
-// Estructura para el PCB (Process Control Block)
-typedef struct task_struct {
-    int pid;                // Identificador del proceso
-    struct task_struct *siguiente;  // Puntero al siguiente proceso en la cola
-} PCB;
-
-typedef struct { 
-    pthread_t thread; 
-    int id; 
-} Thread;
-
-typedef struct { 
-    Thread* threads; 
-    int num_threads; 
-} ThreadArgs;
-
-// Variables globales
-PCB *colaProcesos = NULL;
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;
-int num_processes = 0;
-int ticks = 0;
 
 void *PrintTask(void *processId) { 
     int process= *(int *)processId; 
@@ -48,11 +27,6 @@ void* scheduler(void* args){
         pthread_cond_wait(&cond2, &mutex);
         int index = 0;
         int threadNum = 0;
-        // while( index < num_processes){
-        //     PCB p = colaProcesos[index];
-        //     int *pid_copy = malloc(sizeof(int));
-        //     *pid_copy = p.pid;
-        //
             printf("Scheduler: num_processes = %d, num_threads = %d\n", num_processes, threadNum);
             PCB *temp = colaProcesos; 
             while (temp != NULL) { 
@@ -68,76 +42,12 @@ void* scheduler(void* args){
             if (threadNum == num_threads) { 
                 printf("Scheduler: CPU is full with %d threads.\n", num_threads); 
             }
-            // if(threadNum < num_threads){
-            //     pthread_create(&threadArray[threadNum].thread, NULL, PrintTask,(void*) &pid_copy);
-            //     printf("Scheduler: Created thread %d for process %d\n", threadNum,p.pid);
-            //     threadNum++;
-            // }else{
-            //     printf("el maximo de procesos ya esta ejecutandose");
-            // }
-            // index++;
-        // }
         pthread_mutex_unlock(&mutex);
     }
     pthread_exit(NULL);
     return NULL;
 }
 
-// Thread para el Generador de Procesos
-void* generarProcesos(void* arg) {
-    while(1) {
-        sleep(rand() % 5 + 1); // Genera un proceso cada 1-5 segundos
-        PCB *nuevoProceso = (PCB*)malloc(sizeof(PCB));
-        nuevoProceso->pid = rand() % 1000;
-        nuevoProceso->siguiente = NULL;
-        pthread_mutex_lock(&mutex);
-        num_processes++;
-        nuevoProceso->siguiente = colaProcesos;
-        colaProcesos = nuevoProceso;
-        printf("Generado proceso con PID %d\n", nuevoProceso->pid);
-        
-        // PCB *temp = colaProcesos;
-        // printf("Lista de procesos:\n");
-        // while (temp != NULL) {
-        //     printf("PID %d\n", temp->pid);
-        //     temp = temp->siguiente;
-        // }
-        pthread_mutex_unlock(&mutex);
-    }
-    return NULL;
-}
-
-// Thread para el Timer
-void* timer(void* arg) {
-    float* hercios=(float*)arg;
-    int frequenciaTicks=(int)(1.0/ *hercios);
-    printf("hercios: %f", *hercios);
-    printf("hercios: %d",frequenciaTicks);
-    while(1) {
-        pthread_mutex_lock(&mutex);
-        while (ticks < frequenciaTicks) {  // Ajusta el intervalo de ticks según sea necesario
-            pthread_cond_wait(&cond, &mutex);
-        }
-        // printf("Timer tick\n");
-        ticks = 0;
-        pthread_cond_signal(&cond2);
-        pthread_mutex_unlock(&mutex);
-    }
-    return NULL;
-}
-
-// Thread para gestionar el reloj del sistema
-void* clockNuestro(){
-    while(1){
-        sleep(1);
-        pthread_mutex_lock(&mutex);
-        ticks++;
-        // printf("clock tick\n");
-        pthread_cond_signal(&cond);
-        pthread_mutex_unlock(&mutex);
-    }
-    return NULL;
-}
 
 int main(int argc, char** argv) {
     // pthread_t hilos[atoi(argv[3])];
