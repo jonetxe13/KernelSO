@@ -26,3 +26,4 @@ extern int ticks;
 void* clockNuestro();
 void* timer(void* arg);
 void* generarProcesos(void* arg);
+void* scheduler(void* arg);

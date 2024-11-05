@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <stdio.h>
 
 // Thread para el Generador de Procesos
 void* generarProcesos(void* arg) {
