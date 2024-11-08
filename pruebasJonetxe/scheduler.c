@@ -43,16 +43,16 @@ void* scheduler(void* args){
                     temp = temp->siguiente;
                  }
 
-    // Limpiar procesos terminados
-    for (int i = 0; i < num_threads; i++) {
-        if (threadArray[i].process.tiempoVida == 0) {
-            // Manejar el proceso terminado
-            printf("Scheduler: Process %d has completed execution\n", threadArray[i].process.pid);
-        }
-    }
+                // Limpiar procesos terminados
+                for (int i = 0; i < num_threads; i++) {
+                    if (threadArray[i].process.tiempoVida == 0) {
+                        // Manejar el proceso terminado
+                        printf("Scheduler: Process %d has completed execution\n", threadArray[i].process.pid);
+                    }
+                }
 
-    threadNum++;
- }
+                threadNum++;
+             }
             free(pid_copy);
         } 
         if (threadNum == num_threads) { 
