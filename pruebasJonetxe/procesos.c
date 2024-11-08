@@ -9,7 +9,7 @@ void* generarProcesos(void* arg) {
     while(1) {
         sleep(rand() % 5 + 1); // Genera un proceso cada 1-5 segundos
         PCB *nuevoProceso = (PCB*)malloc(sizeof(PCB));
-        nuevoProceso->pid = rand() % 1000;
+        nuevoProceso->pid = (rand() % 1000) * 100;
         nuevoProceso->siguiente = NULL;
         nuevoProceso->tiempoVida = rand() % 30;
         pthread_mutex_lock(&mutex);
