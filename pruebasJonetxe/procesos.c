@@ -11,12 +11,12 @@ void* generarProcesos(void* arg) {
         PCB *nuevoProceso = (PCB*)malloc(sizeof(PCB));
         nuevoProceso->pid = (rand() % 1000) * 100;
         nuevoProceso->siguiente = NULL;
-        nuevoProceso->tiempoVida = rand() % 30;
+        nuevoProceso->tiempoVida = rand() % 20;
         pthread_mutex_lock(&mutex);
         num_processes++;
         nuevoProceso->siguiente = colaProcesos;
         colaProcesos = nuevoProceso;
-        printf("Generado proceso con PID %d\n", nuevoProceso->pid);
+        printf("Generado proceso con PID %d y tiempo de vida %d\n", nuevoProceso->pid, nuevoProceso->tiempoVida);
 
         pthread_mutex_unlock(&mutex);
     }

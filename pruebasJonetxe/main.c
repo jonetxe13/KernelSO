@@ -1,4 +1,3 @@
-#include <math.h>
 #include <linux/sched.h>
 #include <stdio.h>
 #include <pthread.h>
@@ -6,13 +5,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-// #include "clock.c"
 #include "globales.h"
 
 
 
 int main(int argc, char** argv) {
     // pthread_t hilos[atoi(argv[3])];
+    printf("yo uqe se ya0");
     Thread threads[atoi(argv[2])];
     ThreadArgs threadArgs = {threads, atoi(argv[2])};
     
@@ -22,6 +21,7 @@ int main(int argc, char** argv) {
     }
     float frequencia = atof(argv[1]);
     pthread_t relojThread, timerThread, procesoThread, schedulerThread;
+
 
     // Crear threads
     if (pthread_create(&relojThread, NULL, clockNuestro, NULL)) {
@@ -40,7 +40,9 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Error creando el thread de un proceso");
         return 1;
     }
+    printf("yo uqe se ya0");
     pthread_join(schedulerThread, NULL);
+    printf("yo uqe se ya");
     // Unirse a los threads (para que el programa no termine inmediatamente)
     pthread_join(relojThread, NULL);
     pthread_join(timerThread, NULL);
