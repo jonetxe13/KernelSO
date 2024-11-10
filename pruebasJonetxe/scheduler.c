@@ -58,7 +58,9 @@ void* scheduler(void* args){
       }
     
       int quantum = 3;
+      printf("hola0.5");
       for(int i = 0;  i < num_threads; i++){
+        printf("hola0.7");
         if(threadArray[i].process.tiempoVida > quantum){
           threadArray[i].process.tiempoVida -= quantum;
           printf("hola1");
@@ -67,14 +69,17 @@ void* scheduler(void* args){
             PCB *nuevoCola = &threadArray[i].process;
             threadArray[i].process = *temp;
             PCB *temp2 = temp;
-            while(temp2!=NULL){
-              if(temp2->siguiente == NULL){
-                *temp2->siguiente = *nuevoCola;
-              }
-            }
             temp = temp->siguiente;
-            printf("1se ha metido el proceso %d al thread %d\n", temp2->pid, threadArray[i].process.pid);
+            while(temp2!=NULL && temp2->siguiente != NULL){
+              if(temp2 != NULL){
+                  *temp2->siguiente = *nuevoCola;
+                  printf("1se ha metido el proceso %d al thread %d\n", temp2->pid, threadArray[i].id);
+                  break;
+              }
+              temp2 = temp2->siguiente;
             }
+            }
+
         }
         else{
           printf("hola");
