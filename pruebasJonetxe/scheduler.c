@@ -18,10 +18,9 @@ void* scheduler(void* args){
     // printf("hola justo al principio loop");
       pthread_mutex_lock(&mutex);
     // printf("hola dentro del lock");
-            // printf("Cola de procesos vacía\n");
       pthread_cond_wait(&cond2, &mutex);
       PCB *temp = colaProcesos;
-      // printf("hola0");
+      printf("hola0");
       for(int i = 0;  i < num_threads; i++){
         if(threadArray[i].process.pid == 0 && temp != NULL){
           threadArray[i].process = *temp;
@@ -29,68 +28,42 @@ void* scheduler(void* args){
           temp = temp->siguiente;
           free(liberar);
           colaProcesos = temp; 
-          // temp = colaProcesos;
             printf("se ha metido el proceso %d al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
         }
       }
     
       int quantum = 3;
-      for(int i = 0;  i < num_threads; i++){
-        if(threadArray[i].process.pid == 0) continue;
+      for (int i = 0; i < num_threads; i++) {
+          if (threadArray[i].process.pid == 0) continue;
 
-        if(threadArray[i].process.tiempoVida > quantum){
+          if (threadArray[i].process.tiempoVida > quantum) {
+              threadArray[i].process.tiempoVida -= quantum;
+              printf("proceso %d su nuevo tiempo de vida es %d\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida);
 
-          threadArray[i].process.tiempoVida -= quantum;
-          printf("proceso %d su nuevo tiempo de vida es %d\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida);
+              PCB *nuevoCola = malloc(sizeof(PCB));
+              *nuevoCola = threadArray[i].process;
+              nuevoCola->siguiente = NULL;
 
-          PCB *nuevoCola = malloc(sizeof(PCB));
-          *nuevoCola = threadArray[i].process;
-          nuevoCola->siguiente = NULL;
+              if (colaProcesos != NULL) {
+                  threadArray[i].process = *colaProcesos;
+                  PCB *temp = colaProcesos;
+                  colaProcesos = colaProcesos->siguiente;
+                  free(temp);  // Liberar el nodo actual
+                  printf("Nuevo proceso %d asignado al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
 
-          if(colaProcesos != NULL){
-            threadArray[i].process = *colaProcesos;
-            // PCB *siguiente = temp->siguiente;
-            if(colaProcesos->siguiente != NULL){
-            PCB *temp2 = colaProcesos; //el coredumped está por aquiiiiiiiiiiiiiiiiiiii
-            temp2->siguiente = NULL;
-            colaProcesos = colaProcesos->siguiente;
-            free(temp2);  // Liberar el nodo actual
-            // temp = siguiente;
-            printf("Nuevo proceso %d asignado al thread %d\n", 
-                   threadArray[i].process.pid, 
-                   threadArray[i].id);
-
-            PCB *ultimo = colaProcesos;
-            while(ultimo->siguiente != NULL) {
-                ultimo = ultimo->siguiente;
-            }
-            ultimo->siguiente = nuevoCola;
-            }
+                  PCB *ultimo = colaProcesos;
+                  if (ultimo != NULL) {
+                      while (ultimo->siguiente != NULL) {
+                          ultimo = ultimo->siguiente;
+                      }
+                      ultimo->siguiente = nuevoCola;
+                  } else {
+                      colaProcesos = nuevoCola;
+                  }
+              } else {
+                  threadArray[i].process.pid = 0;
+              }
           }
-          // } else {
-            threadArray[i].process.pid = 0;
-          // printf("hola1\n");
-          // }
-
-        }
-        else{
-          printf("Proceso %d ha finalizado\n", threadArray[i].process.pid);
-          
-          // Poner nuevo proceso en el thread si hay disponible
-          if(colaProcesos!= NULL) {
-              threadArray[i].process = *colaProcesos;
-              PCB *temp3= colaProcesos;
-              colaProcesos = colaProcesos->siguiente;
-              free(temp3);  // Liberar el nodo actual
-              // temp = siguiente;
-              printf("Nuevo proceso %d asignado al thread %d\n", 
-                     threadArray[i].process.pid, 
-                     threadArray[i].id);
-          } else {
-              // Si no hay más procesos, marcar el thread como libre
-              threadArray[i].process.pid = 0;
-          }
-        }
       }
 
       // printf("hola3\n");
