@@ -1,4 +1,5 @@
 #include <pthread.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "globales.h"
 
@@ -9,7 +10,8 @@ void* clockNuestro(){
         pthread_mutex_lock(&mutex);
         ticks++;
         // printf("clock tick\n");
-        pthread_cond_signal(&cond);
+        pthread_cond_broadcast(&cond);
+        // printf("clock signal\n");
         pthread_mutex_unlock(&mutex);
     }
     return NULL;

@@ -14,8 +14,17 @@ void* generarProcesos(void* arg) {
         nuevoProceso->tiempoVida = rand() % 20;
         pthread_mutex_lock(&mutex);
         num_processes++;
-        nuevoProceso->siguiente = colaProcesos;
-        colaProcesos = nuevoProceso;
+        if(colaProcesos == NULL) {
+            colaProcesos = nuevoProceso;
+        } else {
+            PCB *ultimo = colaProcesos;
+            while(ultimo->siguiente != NULL) {
+                ultimo = ultimo->siguiente;
+            }
+            ultimo->siguiente = nuevoProceso;
+        }
+        // nuevoProceso->siguiente = colaProcesos;
+        // colaProcesos = nuevoProceso;
         printf("Generado proceso con PID %d y tiempo de vida %d\n", nuevoProceso->pid, nuevoProceso->tiempoVida);
 
         pthread_mutex_unlock(&mutex);

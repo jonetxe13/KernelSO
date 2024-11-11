@@ -15,85 +15,87 @@ void* scheduler(void* args){
       threadArray[i].id=i;
     }
     while (1) {
+    // printf("hola justo al principio loop");
       pthread_mutex_lock(&mutex);
+    // printf("hola dentro del lock");
+            // printf("Cola de procesos vacía\n");
       pthread_cond_wait(&cond2, &mutex);
-      // int threadNum = 0;
       PCB *temp = colaProcesos;
-      // while (temp != NULL && threadNum < num_threads) { //iterar por la cola de procesos por si se libera algun hilo
-      //   printf("Scheduler: Created thread %d for process %d\n", threadNum,
-      //          temp->pid);
-      //   int quantum = 3;
-      //   threadArray[threadNum].process = *temp;
-      //   int tiempoRestante = threadArray[threadNum].process.tiempoVida;
-      //   if (tiempoRestante > 0) {
-      //     if (tiempoRestante > quantum) {
-      //       threadArray[threadNum].process.tiempoVida -= quantum;
-      //       printf("Proceso %d ejecutado %d segundos\n",
-      //              threadArray[threadNum].process.pid, quantum);
-      //     } else {
-      //       printf("Proceso %d ejecutado %d tiempo ha finalizado\n",
-      //              threadArray[threadNum].process.pid, tiempoRestante);
-      //       threadArray[threadNum].process.tiempoVida = 0;
-      //     }
-      //     usleep(quantum * 1000);
-      //   }
-      //   if (threadArray[threadNum].process.tiempoVida == 0) {
-      //     printf("Scheduler: Process %d has completed execution\n",
-      //            threadArray[threadNum].process.pid);
-      //   }
-      //   temp = temp->siguiente;
-      //   threadNum++;
-      // }
-      // if (threadNum == num_threads) {
-      //   printf("Scheduler: CPU is full with %d threads.\n", num_threads);
-      // }
-
+      // printf("hola0");
       for(int i = 0;  i < num_threads; i++){
         if(threadArray[i].process.pid == 0 && temp != NULL){
           threadArray[i].process = *temp;
+          PCB *liberar = temp;
           temp = temp->siguiente;
-          printf("se ha metido el proceso %d al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
-          printf("hola0");
+          free(liberar);
+          colaProcesos = temp; 
+          // temp = colaProcesos;
+            printf("se ha metido el proceso %d al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
         }
       }
     
       int quantum = 3;
-      printf("hola0.5");
       for(int i = 0;  i < num_threads; i++){
-        printf("hola0.7");
+        if(threadArray[i].process.pid == 0) continue;
+
         if(threadArray[i].process.tiempoVida > quantum){
+
           threadArray[i].process.tiempoVida -= quantum;
-          printf("hola1");
-          if(temp != NULL){
-            printf("hola2");
-            PCB *nuevoCola = &threadArray[i].process;
-            threadArray[i].process = *temp;
-            PCB *temp2 = temp;
-            temp = temp->siguiente;
-            while(temp2!=NULL && temp2->siguiente != NULL){
-              if(temp2 != NULL){
-                  *temp2->siguiente = *nuevoCola;
-                  printf("1se ha metido el proceso %d al thread %d\n", temp2->pid, threadArray[i].id);
-                  break;
-              }
-              temp2 = temp2->siguiente;
+          printf("proceso %d su nuevo tiempo de vida es %d\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida);
+
+          PCB *nuevoCola = malloc(sizeof(PCB));
+          *nuevoCola = threadArray[i].process;
+          nuevoCola->siguiente = NULL;
+
+          if(colaProcesos != NULL){
+            threadArray[i].process = *colaProcesos;
+            // PCB *siguiente = temp->siguiente;
+            if(colaProcesos->siguiente != NULL){
+            PCB *temp2 = colaProcesos; //el coredumped está por aquiiiiiiiiiiiiiiiiiiii
+            temp2->siguiente = NULL;
+            colaProcesos = colaProcesos->siguiente;
+            free(temp2);  // Liberar el nodo actual
+            // temp = siguiente;
+            printf("Nuevo proceso %d asignado al thread %d\n", 
+                   threadArray[i].process.pid, 
+                   threadArray[i].id);
+
+            PCB *ultimo = colaProcesos;
+            while(ultimo->siguiente != NULL) {
+                ultimo = ultimo->siguiente;
             }
+            ultimo->siguiente = nuevoCola;
             }
+          }
+          // } else {
+            threadArray[i].process.pid = 0;
+          // printf("hola1\n");
+          // }
 
         }
         else{
-          printf("hola");
-          threadArray[i].process.tiempoVida = 0;
-          printf("el proceso %d ha finalizado\n", threadArray[i].process.pid);
-          if(temp != NULL){
-            threadArray[i].process = *temp;
-            temp = temp->siguiente;
-            printf("2se ha metido el proceso %d al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
-            }
+          printf("Proceso %d ha finalizado\n", threadArray[i].process.pid);
+          
+          // Poner nuevo proceso en el thread si hay disponible
+          if(colaProcesos!= NULL) {
+              threadArray[i].process = *colaProcesos;
+              PCB *temp3= colaProcesos;
+              colaProcesos = colaProcesos->siguiente;
+              free(temp3);  // Liberar el nodo actual
+              // temp = siguiente;
+              printf("Nuevo proceso %d asignado al thread %d\n", 
+                     threadArray[i].process.pid, 
+                     threadArray[i].id);
+          } else {
+              // Si no hay más procesos, marcar el thread como libre
+              threadArray[i].process.pid = 0;
+          }
         }
       }
 
+      // printf("hola3\n");
       pthread_mutex_unlock(&mutex);
+      // printf("unlocked?\n");
     }
     pthread_exit(NULL);
     return NULL;
