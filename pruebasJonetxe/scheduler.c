@@ -44,26 +44,6 @@ void* scheduler(void* args){
               *nuevoCola = threadArray[i].process;
               nuevoCola->siguiente = NULL;
 
-              // if (colaProcesos != NULL) {
-              //     threadArray[i].process = *colaProcesos;
-              //     PCB *temp = colaProcesos;
-              //     colaProcesos = colaProcesos->siguiente;
-              //     free(temp);  // Liberar el nodo actual
-              //     printf("Nuevo proceso %d asignado al thread %d\n", threadArray[i].process.pid, threadArray[i].id);
-
-              //     PCB *ultimo = colaProcesos;
-              //     if (ultimo != NULL) {
-              //         while (ultimo->siguiente != NULL) {
-              //             ultimo = ultimo->siguiente;
-              //         }
-              //         ultimo->siguiente = nuevoCola;
-              //     } else {
-              //         colaProcesos = nuevoCola;
-              //     }
-              // } else {
-              //     threadArray[i].process.pid = 0;
-              // }
-
               if (colaProcesos != NULL) {
                 PCB *ultimo = colaProcesos;
                 while (ultimo->siguiente != NULL) {
@@ -88,7 +68,6 @@ void* scheduler(void* args){
             printf("proceso %d ha terminado\n", threadArray[i].process.pid);
             threadArray[i].process.pid = 0;
         }
-          // }
       }
 
       // printf("hola3\n");
