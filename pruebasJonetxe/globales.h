@@ -22,6 +22,11 @@ typedef struct {
 } CPU;
 
 typedef struct { 
+    int id; 
+    CPU cpus[];
+} Machine;
+
+typedef struct { 
     Thread* threads; 
     int num_threads; 
 } ThreadArgs;

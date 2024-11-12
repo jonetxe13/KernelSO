@@ -12,10 +12,23 @@
 int main(int argc, char** argv) {
     // pthread_t hilos[atoi(argv[3])];
     printf("yo uqe se ya0");
-    Thread threads[atoi(argv[2])];
-    ThreadArgs threadArgs = {threads, atoi(argv[2])};
+
+    // Thread threads[atoi(argv[2])];
+    // Core cores[atoi(argv[3])];
+    // CPU cpu[atoi(argv[2])];
+    Machine maquina;
+    for (int i = 0; i<(atoi(argv[2])); i++){
+        for (int j = 0; j<(atoi(argv[3])); j++){
+            for (int k = 0; k<(atoi(argv[4])); k++){
+                maquina.cpus[i].id = i;
+                maquina.cpus[i].cores[j].id= j;
+                maquina.cpus[i].cores[j].threads[k].id = 0;
+            }
+        }
+    }
+    void* args[4] = {argv[2], argv[3], argv[4], &maquina};
     
-    if (argc == 1){
+    if (argc == 3){
         printf("tienes que meter un argumento melon");
         exit(1);
     }
@@ -36,7 +49,7 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Error creando el thread del generador de procesos\n");
         return 1;
     }
-    if (pthread_create(&schedulerThread, NULL, scheduler, &threadArgs)) {
+    if (pthread_create(&schedulerThread, NULL, scheduler, &args)) {
         fprintf(stderr, "Error creando el thread de un proceso");
         return 1;
     }
