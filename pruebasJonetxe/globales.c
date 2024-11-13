@@ -7,6 +7,7 @@
 #include "globales.h"
 
 PCB *colaProcesos = NULL;
+SchedulerArgs *sched_args;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;

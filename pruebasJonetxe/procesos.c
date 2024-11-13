@@ -7,12 +7,12 @@
 // Thread para el Generador de Procesos
 void* generarProcesos(void* arg) {
     int count = 0;
-    while(count < 5) {
+    while(count < 10) {
         // sleep(rand() % 10 + 1); // Genera un proceso cada 1-5 segundos
         PCB *nuevoProceso = (PCB*)malloc(sizeof(PCB));
         nuevoProceso->pid = (rand() % 1000) * 100;
         nuevoProceso->siguiente = NULL;
-        nuevoProceso->tiempoVida = rand() % 20;
+        nuevoProceso->tiempoVida = rand() % 20 + 1;
         pthread_mutex_lock(&mutex);
         num_processes++;
         if(colaProcesos == NULL) {

@@ -17,12 +17,21 @@ int main(int argc, char** argv) {
     // Core cores[atoi(argv[3])];
     // CPU cpu[atoi(argv[2])];
     Machine maquina;
+    maquina.cpus = malloc(atoi(argv[2])* sizeof(CPU));
     for (int i = 0; i<(atoi(argv[2])); i++){
+        maquina.cpus[i].id = i+1;
+        maquina.cpus[i].cores = malloc(atoi(argv[3])* sizeof(Core));
+        printf("el id de cpu es: %d\n", i+1);
         for (int j = 0; j<(atoi(argv[3])); j++){
+            maquina.cpus[i].cores[j].id= j+1;
+            maquina.cpus[i].cores[j].threads = malloc(atoi(argv[4])* sizeof(Thread));
+            printf("el id de core es: %d\n", j+1);
             for (int k = 0; k<(atoi(argv[4])); k++){
-                maquina.cpus[i].id = i;
-                maquina.cpus[i].cores[j].id= j;
-                maquina.cpus[i].cores[j].threads[k].id = 0;
+                maquina.cpus[i].cores[j].threads[k].id = k+1;
+                maquina.cpus[i].cores[j].threads[k].process.pid = 0; // Inicialización adicional 
+                maquina.cpus[i].cores[j].threads[k].process.tiempoVida = 0; // Inicialización adicional 
+                maquina.cpus[i].cores[j].threads[k].process.siguiente = NULL;
+                printf("el id de thread es: %d\n", k+1);
             }
         }
     }
@@ -60,6 +69,14 @@ int main(int argc, char** argv) {
     pthread_join(relojThread, NULL);
     pthread_join(timerThread, NULL);
     pthread_join(procesoThread, NULL);
+    // At the end of main.c
+    for (int i = 0; i < atoi(argv[2]); i++) {
+        for (int j = 0; j < atoi(argv[3]); j++) {
+            free(maquina.cpus[i].cores[j].threads);
+        }
+        free(maquina.cpus[i].cores);
+    }
+    free(maquina.cpus);
 
     return 0;
 }

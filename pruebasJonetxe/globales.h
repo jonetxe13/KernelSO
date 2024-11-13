@@ -1,8 +1,8 @@
 #include <pthread.h>
 // Estructura para el PCB (Process Control Block)
-typedef struct task_struct {
+typedef struct PCB {
     int pid;                // Identificador del proceso
-    struct task_struct *siguiente;  // Puntero al siguiente proceso en la cola
+    struct PCB *siguiente;  // Puntero al siguiente proceso en la cola
     int tiempoVida;
 } PCB;
 
@@ -13,23 +13,31 @@ typedef struct {
 
 typedef struct { 
     int id; 
-    Thread threads[];
+    Thread* threads;
 } Core;
 
 typedef struct { 
     int id; 
-    Core cores[];
+    Core* cores;
 } CPU;
 
 typedef struct { 
     int id; 
-    CPU cpus[];
+    CPU* cpus;
 } Machine;
 
 typedef struct { 
     Thread* threads; 
     int num_threads; 
 } ThreadArgs;
+
+typedef struct {
+    float hercios;
+    int num_cpus;
+    int num_cores;
+    int num_threads;
+    Machine *maquina;
+} SchedulerArgs;
 
 // Variables globales
 extern PCB *colaProcesos;
