@@ -4,13 +4,14 @@
 // Thread para el Timer
 void* timer(void* arg) {
     float* hercios=(float*)arg;
-    int frequenciaTicks=(int)(1.0/ *hercios);
-    printf("hercios: %f", *hercios);
-    printf("hercios: %d",frequenciaTicks);
+    frecuenciaTicks = (int)(1.0 / *hercios);
+    printf("hercios: %f\n", *hercios);
+    frecuenciaTicks = (int)(1.0 / *hercios);
+    printf("hercios: %d",frecuenciaTicks);
     while(1) {
         // printf("ni idea ya");
         pthread_mutex_lock(&mutex);
-        while (ticks < frequenciaTicks) {  // Ajusta el intervalo de ticks según sea necesario
+        while (ticks < frecuenciaTicks) {  // Ajusta el intervalo de ticks según sea necesario
             // printf("1llega a los ticks");
             pthread_cond_wait(&cond, &mutex);
             // printf("2llega a los ticks");

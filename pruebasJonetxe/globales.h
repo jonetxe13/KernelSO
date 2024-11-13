@@ -46,6 +46,7 @@ extern pthread_cond_t cond;
 extern pthread_cond_t cond2;
 extern int num_processes;
 extern int ticks;
+extern int frecuenciaTicks;
 
 void* clockNuestro();
 void* timer(void* arg);

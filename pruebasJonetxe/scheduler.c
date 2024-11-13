@@ -1,4 +1,7 @@
 #include "globales.h"
+
+// Assuming frequenciaTicks is a global variable, define it here if not included in "globales.h"
+extern int frecuenciaTicks;
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +31,8 @@ void meterSiEstaVacioOAcabado(int num_threads, Thread* threadArray, int num_cpu,
 
 void roundRobin(int num_threads, Thread* threadArray){
       // printf("roundRobin: Entering roundRobin\n");
-        int quantum = 3;
+
+      int quantum = frecuenciaTicks;
       for (int i = 0; i < num_threads; i++) {
           if (threadArray[i].process.pid == 0) continue;
 

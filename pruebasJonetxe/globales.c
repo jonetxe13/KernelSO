@@ -13,3 +13,4 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;
 int num_processes = 0;
 int ticks = 0;
+int frecuenciaTicks = 0;
