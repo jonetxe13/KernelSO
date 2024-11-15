@@ -14,16 +14,14 @@ void meterSiEstaVacioOAcabado(int num_threads, Thread* threadArray, int num_cpu,
       for(int i = 0;  i < num_threads; i++){
         if(threadArray[i].process.pid == 0 && colaProcesos != NULL){
           // printf("meterSiEstaVacioOAcabado: Assigning process to thread %d\n", i);
-          // pthread_mutex_lock(&mutex);
           threadArray[i].process = *colaProcesos;
           threadArray[i].process.siguiente = NULL;
 
           PCB *liberar = colaProcesos;
           colaProcesos = colaProcesos->siguiente;
-          // pthread_mutex_unlock(&mutex);
 
           free(liberar);
-          // printf("se ha metido el proceso %d al cpu %d, core %d thread %d\n", threadArray[i].process.pid, num_cpu, num_core, threadArray[i].id);
+          printf("se ha metido el proceso %d al cpu %d, core %d thread %d con nice %d\n", threadArray[i].process.pid, num_cpu, num_core, threadArray[i].id, threadArray[i].process.nice);
         }
       }
       // printf("meterSiEstaVacioOAcabado: Exiting for CPU %d, Core %d\n", num_cpu, num_core);
@@ -31,14 +29,15 @@ void meterSiEstaVacioOAcabado(int num_threads, Thread* threadArray, int num_cpu,
 
 void roundRobin(int num_threads, Thread* threadArray){
       // printf("roundRobin: Entering roundRobin\n");
-
+      imprimirColaProcesos(colaProcesos);
       int quantum = frecuenciaTicks;
       for (int i = 0; i < num_threads; i++) {
           if (threadArray[i].process.pid == 0) continue;
 
           if (threadArray[i].process.tiempoVida > quantum) {
               threadArray[i].process.tiempoVida -= quantum;
-              printf("proceso %d su nuevo tiempo de vida es %d\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida);
+              threadArray[i].process.nice -= quantum/2;
+              printf("proceso %d su nuevo tiempo de vida es %d y su nice es %d\n", threadArray[i].process.pid, threadArray[i].process.tiempoVida, threadArray[i].process.nice);
 
               PCB *nuevoCola = malloc(sizeof(PCB));
               if (nuevoCola == NULL) {
@@ -48,7 +47,6 @@ void roundRobin(int num_threads, Thread* threadArray){
               *nuevoCola = threadArray[i].process;
               nuevoCola->siguiente = NULL;
 
-              // pthread_mutex_lock(&mutex);
               if (colaProcesos != NULL) {
                 PCB *ultimo = colaProcesos;
                 while (ultimo->siguiente != NULL) {
@@ -58,7 +56,6 @@ void roundRobin(int num_threads, Thread* threadArray){
               } else {
                 colaProcesos = nuevoCola;
               } 
-              // pthread_mutex_unlock(&mutex);
 
               threadArray[i].process.pid = 0;
               threadArray[i].process.tiempoVida = 0;
@@ -81,7 +78,7 @@ void* scheduler(void* args){
     int num_threads = atoi((char*)arg_array[2]); 
     Machine *maquina = (Machine*)arg_array[3]; // Correct cast without taking address
 
-    printf("numero de CPUs: %d \n numero de Nucleos: %d \n numero de threads: %d \n", num_cpus, num_cores, num_threads);
+    // printf("numero de CPUs: %d \n numero de Nucleos: %d \n numero de threads: %d \n", num_cpus, num_cores, num_threads);
     if (num_cpus <= 0 || num_cores <= 0 || num_threads <= 0) {
         printf("Invalid scheduler configuration: CPUs=%d, Cores=%d, Threads=%d\n", num_cpus, num_cores, num_threads);
         pthread_exit(NULL);
@@ -94,6 +91,8 @@ void* scheduler(void* args){
       pthread_cond_wait(&cond2, &mutex);
       // PCB *temp = colaProcesos;
       printf("hola0");
+
+      ordenarColaProcesos(&colaProcesos);
 
       for(int i = 0; i < num_cpus; i++){
         for(int j = 0; j < num_cores; j++){

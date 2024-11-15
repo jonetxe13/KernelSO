@@ -4,6 +4,7 @@ typedef struct PCB {
     int pid;                // Identificador del proceso
     struct PCB *siguiente;  // Puntero al siguiente proceso en la cola
     int tiempoVida;
+    int nice;
 } PCB;
 
 typedef struct { 
@@ -52,3 +53,4 @@ void* clockNuestro();
 void* timer(void* arg);
 void* generarProcesos(void* arg);
 void* scheduler(void* arg);
+void ordenarColaProcesos(PCB **colaProcesos);
