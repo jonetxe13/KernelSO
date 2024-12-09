@@ -62,45 +62,33 @@ int main(int argc, char** argv) {
     float frequencia = atof(argv[1]);
     pthread_t relojThread, timerThread, procesoThread, schedulerThread;
 
-    // Inicializar la memoria física
-    #define PHYSICAL_MEMORY_SIZE (1 << 24) // 24 bits de dirección
-    #define KERNEL_SIZE (1 << 20)          // 1 MB para el kernel
-
-    void* memoriaFisica = malloc(PHYSICAL_MEMORY_SIZE);
-    if (memoriaFisica == NULL) {
-        fprintf(stderr, "Error al asignar memoria física\n");
-        return 1;
-    }
-
-    // Reservar espacio para el kernel
-    void* kernel_space = memoriaFisica;
 
     // Cargar programas utilizando el Loader
     if (Loader() != 0) {
         fprintf(stderr, "Error al cargar los programas\n");
-        free(memoriaFisica);
+        // free(memoriaFisica);
         return 1;
     }
 
     // Crear threads
     if (pthread_create(&relojThread, NULL, clockNuestro, NULL)) {
         fprintf(stderr, "Error creando el thread del reloj\n");
-        free(memoriaFisica);
+        // free(memoriaFisica);
         return 1;
     }
     if (pthread_create(&timerThread, NULL, timer, &frequencia)) {
         fprintf(stderr, "Error creando el thread del timer\n");
-        free(memoriaFisica);
+        // free(memoriaFisica);
         return 1;
     }
     if (pthread_create(&procesoThread, NULL, generarProcesos, NULL)) {
         fprintf(stderr, "Error creando el thread del generador de procesos\n");
-        free(memoriaFisica);
+        // free(memoriaFisica);
         return 1;
     }
     if (pthread_create(&schedulerThread, NULL, scheduler, &args)) {
         fprintf(stderr, "Error creando el thread de un proceso");
-        free(memoriaFisica);
+        // free(memoriaFisica);
         return 1;
     }
 
@@ -119,7 +107,7 @@ int main(int argc, char** argv) {
         free(maquina.cpus[i].cores);
     }
     free(maquina.cpus);
-    free(memoriaFisica);
+    // free(memoriaFisica);
 
     return 0;
 }

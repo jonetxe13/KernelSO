@@ -1,4 +1,39 @@
 #include <pthread.h>
+#include <stdint.h>
+
+#define PHYSICAL_MEMORY_SIZE (1 << 24) // 24 bits de dirección, equivalente a 16 MB
+#define KERNEL_SIZE (PHYSICAL_MEMORY_SIZE / 4) // El kernel ocupa la primera cuarta parte
+
+// Número de elementos en el array
+#define MEMORY_ARRAY_SIZE (PHYSICAL_MEMORY_SIZE / sizeof(uint32_t))
+
+extern uint32_t memoriaFisica[MEMORY_ARRAY_SIZE]; // Array que representa la memoria física
+
+// Asignar la primera cuarta parte al kernel
+extern uint32_t* kernel_space;
+
+// El espacio de usuario comienza después del kernel
+extern uint32_t* user_space;
+
+// Estructura para una entrada de la TLB
+typedef struct {
+    unsigned int page_number;   // Número de página virtual
+    unsigned int frame_number;  // Número de marco físico
+    int valid;                  // Bit de validez
+} TLBEntry;
+
+// Estructura para la TLB
+typedef struct {
+    int num_entries;            // Número de entradas en la TLB
+    TLBEntry entries[16]; // Array de entradas
+} TLB;
+
+// Estructura para la MMU
+typedef struct {
+    void* PTBR;   // Registro apuntador a la tabla de páginas
+    TLB tlb;      // Estructura de la TLB
+} MMU;
+
 // Estructura para el PCB (Process Control Block)
 typedef struct {
     void* code;  // Puntero a la dirección virtual del segmento de código
@@ -14,11 +49,16 @@ typedef struct PCB {
     MM mm;                  // Estructura de memoria
 } PCB;
 
-typedef struct { 
-    int id; 
-    PCB process; 
+// Estructura para el hilo hardware (Thread)
+typedef struct {
+    int id;
+    PCB process;
+    MMU mmu;       // Estructura de la MMU
+    void* RI;      // Registro de instrucción
+    void* PC;      // Contador de programa
 } Thread;
 
+// Estructuras para Core, CPU y Machine
 typedef struct { 
     int id; 
     Thread* threads;
@@ -55,9 +95,6 @@ extern pthread_cond_t cond2;
 extern int num_processes;
 extern int ticks;
 extern int frecuenciaTicks;
-
-extern void* memoriaFisica;
-extern void* kernel_space;
 
 // Prototipo de la función Loader
 int Loader();

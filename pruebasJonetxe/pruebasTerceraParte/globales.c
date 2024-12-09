@@ -6,6 +6,11 @@
 #include <stdlib.h>
 #include "globales.h"
 
+// Definiciones de las variables globales
+uint32_t memoriaFisica[MEMORY_ARRAY_SIZE];
+uint32_t* kernel_space = &memoriaFisica[0];
+uint32_t* user_space = &memoriaFisica[KERNEL_SIZE / sizeof(uint32_t)];
+
 PCB *colaProcesos = NULL;
 SchedulerArgs *sched_args;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -14,9 +19,6 @@ pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;
 int num_processes = 0;
 int ticks = 0;
 int frecuenciaTicks = 0;
-
-void* memoriaFisica = NULL;
-void* kernel_space = NULL;
 
 void imprimirColaProcesos(PCB *colaProcesos) { 
     PCB *temp = colaProcesos; 
