@@ -85,7 +85,6 @@ PCB* cargarProceso(int pid) {
     }
     memset(page_table, 0, sizeof(uint32_t) * NUM_PAGINAS);
     nuevoProceso->mm.pgb = page_table;
-
     // Leer y cargar código y datos en memoria física
     char line[256];
     uint32_t virtual_address = code_base;
