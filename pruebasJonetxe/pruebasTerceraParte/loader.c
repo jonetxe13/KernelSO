@@ -42,6 +42,7 @@ int Loader() {
             ultimo->siguiente = proceso;
         }
         pthread_mutex_unlock(&mutex);
+        imprimirColaProcesos(colaProcesos);
     }
     return 0;
 }
@@ -62,6 +63,8 @@ PCB* cargarProceso(int pid) {
         return NULL;
     }
     nuevoProceso->pid = pid;
+    nuevoProceso->tiempoVida = rand() % 20; // Asigna un valor inicial válido
+    nuevoProceso->nice = rand() % 50;       // Asigna un valor inicial válido
     nuevoProceso->siguiente = NULL;
 
     // Inicializar MM y cargar segmentos

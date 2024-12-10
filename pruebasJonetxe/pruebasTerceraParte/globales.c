@@ -54,6 +54,6 @@ void ordenarColaProcesos(PCB **colaProcesos) {
         sorted = minNode;
     }
     *colaProcesos = sorted;
-    printf("cola despues de ordenar: \n");
-    imprimirColaProcesos(*colaProcesos);
+    // printf("cola despues de ordenar: \n");
+    // imprimirColaProcesos(*colaProcesos);
 }
