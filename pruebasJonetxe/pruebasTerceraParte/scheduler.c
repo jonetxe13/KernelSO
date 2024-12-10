@@ -10,10 +10,8 @@ extern int frecuenciaTicks;
 #include <unistd.h>
 
 void meterSiEstaVacioOAcabado(int num_threads, Thread* threadArray, int num_cpu, int num_core){
-      // printf("meterSiEstaVacioOAcabado: Entering for CPU %d Core %d\n", num_cpu, num_core);
       for(int i = 0;  i < num_threads; i++){
         if(threadArray[i].process.pid == 0 && colaProcesos != NULL){
-          // printf("meterSiEstaVacioOAcabado: Assigning process to thread %d\n", i);
           threadArray[i].process = *colaProcesos;
           threadArray[i].process.siguiente = NULL;
 
@@ -21,15 +19,15 @@ void meterSiEstaVacioOAcabado(int num_threads, Thread* threadArray, int num_cpu,
           colaProcesos = colaProcesos->siguiente;
 
           free(liberar);
-          printf("se ha metido el proceso %d al cpu %d, core %d thread %d con nice %d\n", threadArray[i].process.pid, num_cpu, num_core, threadArray[i].id, threadArray[i].process.nice);
+          printf("Se ha asignado el proceso %d al CPU %d, Core %d, Thread %d con nice %d\n", 
+                 threadArray[i].process.pid, num_cpu, num_core, threadArray[i].id, threadArray[i].process.nice);
         }
       }
-      // printf("meterSiEstaVacioOAcabado: Exiting for CPU %d, Core %d\n", num_cpu, num_core);
 }
 
 void roundRobin(int num_threads, Thread* threadArray){
       // printf("roundRobin: Entering roundRobin\n");
-      imprimirColaProcesos(colaProcesos);
+      // imprimirColaProcesos(colaProcesos);
       int quantum = frecuenciaTicks;
       for (int i = 0; i < num_threads; i++) {
           if (threadArray[i].process.pid == 0) continue;
@@ -88,8 +86,8 @@ void* scheduler(void* args){
 
     while (1) {
       pthread_mutex_lock(&mutex);
+      imprimirColaProcesos(colaProcesos);
       pthread_cond_wait(&cond2, &mutex);
-
       ordenarColaProcesos(&colaProcesos);
 
       for(int i = 0; i < num_cpus; i++){

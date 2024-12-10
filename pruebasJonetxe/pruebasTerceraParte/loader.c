@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdint.h>
 
+
 void cargarEnMemoria(PCB* proceso, uint32_t virtual_address, uint32_t value) {
     uint32_t page_number = virtual_address >> 12; // Páginas de 4KB
     uint32_t offset = virtual_address & 0xFFF;
@@ -23,6 +24,7 @@ void cargarEnMemoria(PCB* proceso, uint32_t virtual_address, uint32_t value) {
 
     memoriaFisica[physical_address / sizeof(uint32_t)] = value;
 }
+
 int Loader() {
     int totalProgramas = 10; // Número de programas a cargar
     for(int i = 0; i < totalProgramas; i++) {
@@ -48,65 +50,77 @@ int Loader() {
 }
 
 PCB* cargarProceso(int pid) {
-    char filename[256];
-    sprintf(filename, "prog%03d.elf", pid);
-    FILE* file = fopen(filename, "r");
-    if(file == NULL) {
-        fprintf(stderr, "No se pudo abrir el archivo %s\n", filename);
-        return NULL;
-    }
-
+    // Create and initialize PCB
     PCB* nuevoProceso = (PCB*)malloc(sizeof(PCB));
-    if(nuevoProceso == NULL) {
-        fprintf(stderr, "Error al asignar memoria para el proceso\n");
-        fclose(file);
+    if (!nuevoProceso) {
+        fprintf(stderr, "Error al asignar memoria para el PCB\n");
         return NULL;
     }
     nuevoProceso->pid = pid;
-    nuevoProceso->tiempoVida = rand() % 20; // Asigna un valor inicial válido
-    nuevoProceso->nice = rand() % 50;       // Asigna un valor inicial válido
+    nuevoProceso->tiempoVida = rand() % 10 + 1;
+    nuevoProceso->nice = rand() % 30 + 1;
     nuevoProceso->siguiente = NULL;
 
-    // Inicializar MM y cargar segmentos
-    // Asignar direcciones virtuales base para código y datos
-    uint32_t code_base = 0x00000000;
-    uint32_t data_base = 0x00400000;
-    nuevoProceso->mm.code = (void*)(uintptr_t)code_base;
-    nuevoProceso->mm.data = (void*)(uintptr_t)data_base;
+    // Allocate page table in kernel space
+    uint32_t* page_table = (uint32_t*)(kernel_space + (pid * NUM_PAGES));
+    memset(page_table, 0, sizeof(uint32_t) * NUM_PAGES);
+    nuevoProceso->mm.pgb = page_table;
 
-    // Crear tabla de páginas para el proceso
-    #define NUM_PAGINAS 1024
-    uint32_t* page_table = (uint32_t*)malloc(sizeof(uint32_t) * NUM_PAGINAS);
-    if(page_table == NULL) {
-        fprintf(stderr, "Error al asignar memoria para la tabla de páginas\n");
+    // Open executable file
+    char filename[256];
+    sprintf(filename, "prog%03d.elf", pid);
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        fprintf(stderr, "Error al abrir el archivo %s\n", filename);
         free(nuevoProceso);
-        fclose(file);
         return NULL;
     }
-    memset(page_table, 0, sizeof(uint32_t) * NUM_PAGINAS);
-    nuevoProceso->mm.pgb = page_table;
-    // Leer y cargar código y datos en memoria física
-    char line[256];
-    uint32_t virtual_address = code_base;
-    int loading_data = 0;
 
-    while(fgets(line, sizeof(line), file)) {
-        if(strncmp(line, ".text", 5) == 0) {
+    // Initialize variables for loading segments
+    char line[256];
+    uint32_t virtual_address = 0;
+    // int loading_data = 0;
+
+    // Read and load segments
+    while (fgets(line, sizeof(line), file)) {
+        if (strncmp(line, ".text", 5) == 0) {
+            // Parsing code segment
             sscanf(line, ".text %x", &virtual_address);
             nuevoProceso->mm.code = (void*)(uintptr_t)virtual_address;
-            loading_data = 0;
-        } else if(strncmp(line, ".data", 5) == 0) {
+            // loading_data = 0;
+        } else if (strncmp(line, ".data", 5) == 0) {
+            // Parsing data segment
             sscanf(line, ".data %x", &virtual_address);
             nuevoProceso->mm.data = (void*)(uintptr_t)virtual_address;
-            loading_data = 1;
-        } else {
+            // loading_data = 1;
+        } else if (line[0] != '\n' && line[0] != '\0') {
+            // Cargar instrucciones o datos en memoria
             uint32_t value;
-            sscanf(line, "%x", &value);
+            if (sscanf(line, "%x", &value) != 1) {
+                fprintf(stderr, "Error al parsear el valor de datos\n");
+                free(nuevoProceso);
+                fclose(file);
+                return NULL;
+            }
             cargarEnMemoria(nuevoProceso, virtual_address, value);
             virtual_address += sizeof(uint32_t);
         }
     }
 
     fclose(file);
+
+    // Add PCB to process queue
+    // pthread_mutex_lock(&mutex);
+    // if (!colaProcesos) {
+    //     colaProcesos = nuevoProceso;
+    // } else {
+    //     PCB* temp = colaProcesos;
+    //     while (temp->siguiente) {
+    //         temp = temp->siguiente;
+    //     }
+    //     temp->siguiente = nuevoProceso;
+    // }
+    // pthread_mutex_unlock(&mutex);
+
     return nuevoProceso;
 }

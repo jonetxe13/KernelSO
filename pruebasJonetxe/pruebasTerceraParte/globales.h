@@ -3,6 +3,9 @@
 
 #define PHYSICAL_MEMORY_SIZE (1 << 24) // 24 bits de dirección, equivalente a 16 MB
 #define KERNEL_SIZE (PHYSICAL_MEMORY_SIZE / 4) // El kernel ocupa la primera cuarta parte
+#define NUM_PAGES 1024 // Número de páginas
+#define PAGE_SIZE 4096 // Tamaño de página en bytes
+#define MAX_PAGES_PER_PROCESS 256
 
 // Número de elementos en el array
 #define MEMORY_ARRAY_SIZE (PHYSICAL_MEMORY_SIZE / sizeof(uint32_t))
@@ -105,4 +108,5 @@ void* timer(void* arg);
 void* generarProcesos(void* arg);
 void* scheduler(void* arg);
 void ordenarColaProcesos(PCB **colaProcesos);
+void agregarProcesoACola(PCB *nuevoProceso);
 void imprimirColaProcesos(PCB *colaProcesos);

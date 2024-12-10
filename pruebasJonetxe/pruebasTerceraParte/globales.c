@@ -30,30 +30,49 @@ void imprimirColaProcesos(PCB *colaProcesos) {
 }
 
 void ordenarColaProcesos(PCB **colaProcesos) {
-    PCB *sorted = NULL;
-    while (*colaProcesos != NULL) {
-        PCB *minPrev = NULL;
-        PCB *minNode = *colaProcesos;
-        PCB *current = *colaProcesos;
-
-        while (current->siguiente != NULL) {
-            if (current->siguiente->nice < minNode->nice) {
-                minPrev = current;
-                minNode = current->siguiente;
-            }
-            current = current->siguiente;
-        }
-
-        if (minPrev != NULL) {
-            minPrev->siguiente = minNode->siguiente;
-        } else {
-            *colaProcesos = minNode->siguiente;
-        }
-
-        minNode->siguiente = sorted;
-        sorted = minNode;
+    if (!colaProcesos || !(*colaProcesos)) {
+        return;
     }
-    *colaProcesos = sorted;
-    // printf("cola despues de ordenar: \n");
+
+    PCB *sorted = NULL; // Lista ordenada
+    PCB *current = *colaProcesos;
+
+    while (current != NULL) {
+        PCB *next = current->siguiente; // Guardar el siguiente nodo
+
+        // Insertar current en la lista ordenada
+        if (sorted == NULL || current->nice < sorted->nice) {
+            current->siguiente = sorted;
+            sorted = current;
+        } else {
+            PCB *temp = sorted;
+            while (temp->siguiente != NULL && temp->siguiente->nice <= current->nice) {
+                temp = temp->siguiente;
+            }
+            current->siguiente = temp->siguiente;
+            temp->siguiente = current;
+        }
+
+        current = next; // Avanzar al siguiente nodo
+    }
+
+    *colaProcesos = sorted; // Actualizar la cola original
+    printf("Cola después de ordenar:\n");
     // imprimirColaProcesos(*colaProcesos);
+}
+
+void agregarProcesoACola(PCB *nuevoProceso) {
+    pthread_mutex_lock(&mutex);
+    if (colaProcesos == NULL) {
+        colaProcesos = nuevoProceso;
+        printf("agregarProcesoACola: Añadido PID %d como primera entrada\n", nuevoProceso->pid);
+    } else {
+        PCB *ultimo = colaProcesos;
+        while (ultimo->siguiente != NULL) {
+            ultimo = ultimo->siguiente;
+        }
+        ultimo->siguiente = nuevoProceso;
+        printf("agregarProcesoACola: Añadido PID %d al final de la cola\n", nuevoProceso->pid);
+    }
+    pthread_mutex_unlock(&mutex);
 }
