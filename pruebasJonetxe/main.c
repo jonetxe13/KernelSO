@@ -7,50 +7,63 @@
 #include <time.h>
 #include "globales.h"
 
-
-
-int main(int argc, char** argv) {
-    // pthread_t hilos[atoi(argv[3])];
-    printf("yo uqe se ya0");
-
-    // Thread threads[atoi(argv[2])];
-    // Core cores[atoi(argv[3])];
-    // CPU cpu[atoi(argv[2])];
-    Machine maquina;
-    maquina.cpus = malloc(atoi(argv[2])* sizeof(CPU));
-    for (int i = 0; i<(atoi(argv[2])); i++){
-        maquina.cpus[i].id = i+1;
-        maquina.cpus[i].cores = malloc(atoi(argv[3])* sizeof(Core));
-        printf("el id de cpu es: %d\n", i+1);
-        for (int j = 0; j<(atoi(argv[3])); j++){
-            maquina.cpus[i].cores[j].id= j+1;
-            maquina.cpus[i].cores[j].threads = malloc(atoi(argv[4])* sizeof(Thread));
-            printf("el id de core es: %d\n", j+1);
-            for (int k = 0; k<(atoi(argv[4])); k++){
-                maquina.cpus[i].cores[j].threads[k].id = k+1;
-                maquina.cpus[i].cores[j].threads[k].process.pid = 0; // Inicialización adicional 
-                maquina.cpus[i].cores[j].threads[k].process.tiempoVida = 0; // Inicialización adicional 
+// Función para inicializar la máquina
+void inicializarMaquina(Machine *maquina, int num_cpus, int num_cores, int num_threads) {
+    maquina->cpus = malloc(num_cpus * sizeof(CPU));
+    for (int i = 0; i < num_cpus; i++) {
+        maquina.cpus[i].id = i + 1;
+        maquina.cpus[i].cores = malloc(num_cores * sizeof(Core));
+        printf("El id de CPU es: %d\n", i + 1);
+        for (int j = 0; j < num_cores; j++) {
+            maquina.cpus[i].cores[j].id = j + 1;
+            maquina.cpus[i].cores[j].threads = malloc(num_threads * sizeof(Thread));
+            printf("El id de core es: %d\n", j + 1);
+            for (int k = 0; k < num_threads; k++) {
+                maquina.cpus[i].cores[j].threads[k].id = k + 1;
+                maquina.cpus[i].cores[j].threads[k].process.pid = 0;
+                maquina.cpus[i].cores[j].threads[k].process.tiempoVida = 0;
                 maquina.cpus[i].cores[j].threads[k].process.siguiente = NULL;
-                printf("el id de thread es: %d\n", k+1);
+                printf("El id de thread es: %d\n", k + 1);
             }
         }
     }
-    void* args[4] = {argv[2], argv[3], argv[4], &maquina};
-    
-    if (argc == 3){
-        printf("tienes que meter un argumento melon");
-        exit(1);
-    }
-    float frequencia = atof(argv[1]);
-    pthread_t relojThread, timerThread, procesoThread, schedulerThread;
+}
 
+// Función para liberar la memoria de la máquina
+void liberarMaquina(Machine *maquina, int num_cpus, int num_cores) {
+    for (int i = 0; i < num_cpus; i++) {
+        for (int j = 0; j < num_cores; j++) {
+            free(maquina.cpus[i].cores[j].threads);
+        }
+        free(maquina.cpus[i].cores);
+    }
+    free(maquina.cpus);
+}
+
+int main(int argc, char** argv) {
+    if (argc != 5) {
+        fprintf(stderr, "Uso: %s <frecuencia> <num_cpus> <num_cores> <num_threads>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    float frecuencia = atof(argv[1]);
+    int num_cpus = atoi(argv[2]);
+    int num_cores = atoi(argv[3]);
+    int num_threads = atoi(argv[4]);
+
+    Machine maquina;
+    inicializarMaquina(&maquina, num_cpus, num_cores, num_threads);
+
+    void* args[4] = {argv[2], argv[3], argv[4], &maquina};
+
+    pthread_t relojThread, timerThread, procesoThread, schedulerThread;
 
     // Crear threads
     if (pthread_create(&relojThread, NULL, clockNuestro, NULL)) {
         fprintf(stderr, "Error creando el thread del reloj\n");
         return 1;
     }
-    if (pthread_create(&timerThread, NULL, timer, &frequencia)) {
+    if (pthread_create(&timerThread, NULL, timer, &frecuencia)) {
         fprintf(stderr, "Error creando el thread del timer\n");
         return 1;
     }
@@ -58,26 +71,18 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Error creando el thread del generador de procesos\n");
         return 1;
     }
-    if (pthread_create(&schedulerThread, NULL, scheduler, &args)) {
-        fprintf(stderr, "Error creando el thread de un proceso");
+    if (pthread_create(&schedulerThread, NULL, scheduler, args)) {
+        fprintf(stderr, "Error creando el thread del scheduler\n");
         return 1;
     }
-    printf("yo uqe se ya0");
-    pthread_join(schedulerThread, NULL);
-    printf("yo uqe se ya");
+
     // Unirse a los threads (para que el programa no termine inmediatamente)
     pthread_join(relojThread, NULL);
     pthread_join(timerThread, NULL);
     pthread_join(procesoThread, NULL);
-    // At the end of main.c
-    for (int i = 0; i < atoi(argv[2]); i++) {
-        for (int j = 0; j < atoi(argv[3]); j++) {
-            free(maquina.cpus[i].cores[j].threads);
-        }
-        free(maquina.cpus[i].cores);
-    }
-    free(maquina.cpus);
+    pthread_join(schedulerThread, NULL);
+
+    liberarMaquina(&maquina, num_cpus, num_cores);
 
     return 0;
 }
-
