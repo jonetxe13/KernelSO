@@ -54,3 +54,4 @@ void* timer(void* arg);
 void* generarProcesos(void* arg);
 void* scheduler(void* arg);
 void ordenarColaProcesos(PCB **colaProcesos);
+void imprimirColaProcesos(PCB *colaProcesos);

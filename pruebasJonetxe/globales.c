@@ -26,7 +26,7 @@ void imprimirColaProcesos(PCB *colaProcesos) {
 
 void ordenarColaProcesos(PCB **colaProcesos){
     int cambio = 0;
-    PCB *actual = colaProcesos;
+    PCB *actual = *colaProcesos;
     PCB *sorted = NULL;
     if(colaProcesos == NULL){
         return;
