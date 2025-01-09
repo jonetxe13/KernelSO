@@ -1,0 +1,279 @@
+El id de CPU es: 1
+El id de core es: 1
+El id de thread es: 1
+hercios: 1.000000
+hercios: 1Generado proceso con PID 38300, tiempo de vida 7, nice 8
+Generado proceso con PID 91500, tiempo de vida 14, nice 6
+Generado proceso con PID 38600, tiempo de vida 13, nice 10
+Generado proceso con PID 42100, tiempo de vida 3, nice 8
+Generado proceso con PID 69000, tiempo de vida 20, nice 4
+Generado proceso con PID 92600, tiempo de vida 1, nice 7
+Generado proceso con PID 17200, tiempo de vida 17, nice 2
+Generado proceso con PID 36800, tiempo de vida 8, nice 10
+Generado proceso con PID 78200, tiempo de vida 11, nice 3
+Generado proceso con PID 12300, tiempo de vida 8, nice 6
+PID 36800 nice 10 -> PID 38600 nice 10 -> PID 42100 nice 8 -> PID 38300 nice 8 -> PID 92600 nice 7 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 10
+PID 38600 nice 10 -> PID 38300 nice 8 -> PID 42100 nice 8 -> PID 92600 nice 7 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 7, nice 9
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 10
+PID 36800 nice 9 -> PID 42100 nice 8 -> PID 38300 nice 8 -> PID 92600 nice 7 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 12, nice 9
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 9
+PID 38600 nice 9 -> PID 38300 nice 8 -> PID 42100 nice 8 -> PID 92600 nice 7 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 6, nice 8
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 9
+PID 36800 nice 8 -> PID 42100 nice 8 -> PID 38300 nice 8 -> PID 92600 nice 7 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 11, nice 8
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 8
+PID 38600 nice 8 -> PID 38300 nice 8 -> PID 42100 nice 8 -> PID 92600 nice 7 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 5, nice 7
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 8
+PID 42100 nice 8 -> PID 38300 nice 8 -> PID 36800 nice 7 -> PID 92600 nice 7 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 10, nice 7
+Proceso 42100 asignado al CPU 0, core 0, thread 1 con nice 8
+PID 38300 nice 8 -> PID 38600 nice 7 -> PID 92600 nice 7 -> PID 36800 nice 7 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 42100: nuevo tiempo de vida 2, nice 7
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 8
+PID 42100 nice 7 -> PID 36800 nice 7 -> PID 92600 nice 7 -> PID 38600 nice 7 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 6, nice 7
+Proceso 42100 asignado al CPU 0, core 0, thread 1 con nice 7
+PID 38300 nice 7 -> PID 38600 nice 7 -> PID 92600 nice 7 -> PID 36800 nice 7 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 42100: nuevo tiempo de vida 1, nice 6
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 7
+PID 36800 nice 7 -> PID 92600 nice 7 -> PID 38600 nice 7 -> PID 42100 nice 6 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 5, nice 6
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 7
+PID 38600 nice 7 -> PID 92600 nice 7 -> PID 38300 nice 6 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 42100 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 4, nice 6
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 7
+PID 92600 nice 7 -> PID 36800 nice 6 -> PID 42100 nice 6 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 38300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 9, nice 6
+Proceso 92600 asignado al CPU 0, core 0, thread 1 con nice 7
+PID 38600 nice 6 -> PID 38300 nice 6 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 42100 nice 6 -> PID 36800 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 92600 ha terminado
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 36800 nice 6 -> PID 42100 nice 6 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 38300 nice 6 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 8, nice 5
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 38300 nice 6 -> PID 91500 nice 6 -> PID 12300 nice 6 -> PID 42100 nice 6 -> PID 38600 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 3, nice 5
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 42100 nice 6 -> PID 12300 nice 6 -> PID 91500 nice 6 -> PID 36800 nice 5 -> PID 38600 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 4, nice 5
+Proceso 42100 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 91500 nice 6 -> PID 12300 nice 6 -> PID 38300 nice 5 -> PID 38600 nice 5 -> PID 36800 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 42100 ha terminado
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 12300 nice 6 -> PID 36800 nice 5 -> PID 38600 nice 5 -> PID 38300 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 91500: nuevo tiempo de vida 13, nice 5
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 6
+PID 91500 nice 5 -> PID 38300 nice 5 -> PID 38600 nice 5 -> PID 36800 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 12300: nuevo tiempo de vida 7, nice 5
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 5
+PID 12300 nice 5 -> PID 36800 nice 5 -> PID 38600 nice 5 -> PID 38300 nice 5 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 91500: nuevo tiempo de vida 12, nice 4
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 5
+PID 38300 nice 5 -> PID 38600 nice 5 -> PID 36800 nice 5 -> PID 91500 nice 4 -> PID 69000 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 12300: nuevo tiempo de vida 6, nice 4
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 5
+PID 36800 nice 5 -> PID 38600 nice 5 -> PID 12300 nice 4 -> PID 69000 nice 4 -> PID 91500 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 3, nice 4
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 5
+PID 38600 nice 5 -> PID 38300 nice 4 -> PID 91500 nice 4 -> PID 69000 nice 4 -> PID 12300 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 2, nice 4
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 5
+PID 36800 nice 4 -> PID 12300 nice 4 -> PID 69000 nice 4 -> PID 91500 nice 4 -> PID 38300 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 7, nice 4
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 38600 nice 4 -> PID 38300 nice 4 -> PID 91500 nice 4 -> PID 69000 nice 4 -> PID 12300 nice 4 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 36800: nuevo tiempo de vida 1, nice 3
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 12300 nice 4 -> PID 69000 nice 4 -> PID 91500 nice 4 -> PID 38300 nice 4 -> PID 36800 nice 3 -> PID 78200 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 6, nice 3
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 38300 nice 4 -> PID 91500 nice 4 -> PID 69000 nice 4 -> PID 38600 nice 3 -> PID 78200 nice 3 -> PID 36800 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 12300: nuevo tiempo de vida 5, nice 3
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 69000 nice 4 -> PID 91500 nice 4 -> PID 12300 nice 3 -> PID 36800 nice 3 -> PID 78200 nice 3 -> PID 38600 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 2, nice 3
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 91500 nice 4 -> PID 38300 nice 3 -> PID 38600 nice 3 -> PID 78200 nice 3 -> PID 36800 nice 3 -> PID 12300 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 69000: nuevo tiempo de vida 19, nice 3
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 4
+PID 69000 nice 3 -> PID 12300 nice 3 -> PID 36800 nice 3 -> PID 78200 nice 3 -> PID 38600 nice 3 -> PID 38300 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 91500: nuevo tiempo de vida 11, nice 3
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 91500 nice 3 -> PID 38300 nice 3 -> PID 38600 nice 3 -> PID 78200 nice 3 -> PID 36800 nice 3 -> PID 12300 nice 3 -> PID 17200 nice 2 -> NULL
+Proceso 69000: nuevo tiempo de vida 18, nice 2
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 12300 nice 3 -> PID 36800 nice 3 -> PID 78200 nice 3 -> PID 38600 nice 3 -> PID 38300 nice 3 -> PID 69000 nice 2 -> PID 17200 nice 2 -> NULL
+Proceso 91500: nuevo tiempo de vida 10, nice 2
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 38300 nice 3 -> PID 38600 nice 3 -> PID 78200 nice 3 -> PID 36800 nice 3 -> PID 91500 nice 2 -> PID 17200 nice 2 -> PID 69000 nice 2 -> NULL
+Proceso 12300: nuevo tiempo de vida 4, nice 2
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 36800 nice 3 -> PID 78200 nice 3 -> PID 38600 nice 3 -> PID 12300 nice 2 -> PID 69000 nice 2 -> PID 17200 nice 2 -> PID 91500 nice 2 -> NULL
+Proceso 38300: nuevo tiempo de vida 1, nice 2
+Proceso 36800 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 38600 nice 3 -> PID 78200 nice 3 -> PID 38300 nice 2 -> PID 91500 nice 2 -> PID 17200 nice 2 -> PID 69000 nice 2 -> PID 12300 nice 2 -> NULL
+Proceso 36800 ha terminado
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 78200 nice 3 -> PID 12300 nice 2 -> PID 69000 nice 2 -> PID 17200 nice 2 -> PID 91500 nice 2 -> PID 38300 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 5, nice 2
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice 3
+PID 38600 nice 2 -> PID 38300 nice 2 -> PID 91500 nice 2 -> PID 17200 nice 2 -> PID 69000 nice 2 -> PID 12300 nice 2 -> NULL
+Proceso 78200: nuevo tiempo de vida 10, nice 2
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 78200 nice 2 -> PID 12300 nice 2 -> PID 69000 nice 2 -> PID 17200 nice 2 -> PID 91500 nice 2 -> PID 38300 nice 2 -> NULL
+Proceso 38600: nuevo tiempo de vida 4, nice 1
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 38300 nice 2 -> PID 91500 nice 2 -> PID 17200 nice 2 -> PID 69000 nice 2 -> PID 12300 nice 2 -> PID 38600 nice 1 -> NULL
+Proceso 78200: nuevo tiempo de vida 9, nice 1
+Proceso 38300 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 12300 nice 2 -> PID 69000 nice 2 -> PID 17200 nice 2 -> PID 91500 nice 2 -> PID 78200 nice 1 -> PID 38600 nice 1 -> NULL
+Proceso 38300 ha terminado
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 91500 nice 2 -> PID 17200 nice 2 -> PID 69000 nice 2 -> PID 38600 nice 1 -> PID 78200 nice 1 -> NULL
+Proceso 12300: nuevo tiempo de vida 3, nice 1
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 69000 nice 2 -> PID 17200 nice 2 -> PID 12300 nice 1 -> PID 78200 nice 1 -> PID 38600 nice 1 -> NULL
+Proceso 91500: nuevo tiempo de vida 9, nice 1
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 17200 nice 2 -> PID 91500 nice 1 -> PID 38600 nice 1 -> PID 78200 nice 1 -> PID 12300 nice 1 -> NULL
+Proceso 69000: nuevo tiempo de vida 17, nice 1
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice 2
+PID 69000 nice 1 -> PID 12300 nice 1 -> PID 78200 nice 1 -> PID 38600 nice 1 -> PID 91500 nice 1 -> NULL
+Proceso 17200: nuevo tiempo de vida 16, nice 1
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 17200 nice 1 -> PID 91500 nice 1 -> PID 38600 nice 1 -> PID 78200 nice 1 -> PID 12300 nice 1 -> NULL
+Proceso 69000: nuevo tiempo de vida 16, nice 0
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 12300 nice 1 -> PID 78200 nice 1 -> PID 38600 nice 1 -> PID 91500 nice 1 -> PID 69000 nice 0 -> NULL
+Proceso 17200: nuevo tiempo de vida 15, nice 0
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 91500 nice 1 -> PID 38600 nice 1 -> PID 78200 nice 1 -> PID 17200 nice 0 -> PID 69000 nice 0 -> NULL
+Proceso 12300: nuevo tiempo de vida 2, nice 0
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 78200 nice 1 -> PID 38600 nice 1 -> PID 12300 nice 0 -> PID 69000 nice 0 -> PID 17200 nice 0 -> NULL
+Proceso 91500: nuevo tiempo de vida 8, nice 0
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 38600 nice 1 -> PID 91500 nice 0 -> PID 17200 nice 0 -> PID 69000 nice 0 -> PID 12300 nice 0 -> NULL
+Proceso 78200: nuevo tiempo de vida 8, nice 0
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 1
+PID 78200 nice 0 -> PID 12300 nice 0 -> PID 69000 nice 0 -> PID 17200 nice 0 -> PID 91500 nice 0 -> NULL
+Proceso 38600: nuevo tiempo de vida 3, nice 0
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 38600 nice 0 -> PID 91500 nice 0 -> PID 17200 nice 0 -> PID 69000 nice 0 -> PID 12300 nice 0 -> NULL
+Proceso 78200: nuevo tiempo de vida 7, nice -1
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 12300 nice 0 -> PID 69000 nice 0 -> PID 17200 nice 0 -> PID 91500 nice 0 -> PID 78200 nice -1 -> NULL
+Proceso 38600: nuevo tiempo de vida 2, nice -1
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 91500 nice 0 -> PID 17200 nice 0 -> PID 69000 nice 0 -> PID 38600 nice -1 -> PID 78200 nice -1 -> NULL
+Proceso 12300: nuevo tiempo de vida 1, nice -1
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 69000 nice 0 -> PID 17200 nice 0 -> PID 12300 nice -1 -> PID 78200 nice -1 -> PID 38600 nice -1 -> NULL
+Proceso 91500: nuevo tiempo de vida 7, nice -1
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 17200 nice 0 -> PID 91500 nice -1 -> PID 38600 nice -1 -> PID 78200 nice -1 -> PID 12300 nice -1 -> NULL
+Proceso 69000: nuevo tiempo de vida 15, nice -1
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice 0
+PID 69000 nice -1 -> PID 12300 nice -1 -> PID 78200 nice -1 -> PID 38600 nice -1 -> PID 91500 nice -1 -> NULL
+Proceso 17200: nuevo tiempo de vida 14, nice -1
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 17200 nice -1 -> PID 91500 nice -1 -> PID 38600 nice -1 -> PID 78200 nice -1 -> PID 12300 nice -1 -> NULL
+Proceso 69000: nuevo tiempo de vida 14, nice -2
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 12300 nice -1 -> PID 78200 nice -1 -> PID 38600 nice -1 -> PID 91500 nice -1 -> PID 69000 nice -2 -> NULL
+Proceso 17200: nuevo tiempo de vida 13, nice -2
+Proceso 12300 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 91500 nice -1 -> PID 38600 nice -1 -> PID 78200 nice -1 -> PID 17200 nice -2 -> PID 69000 nice -2 -> NULL
+Proceso 12300 ha terminado
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 78200 nice -1 -> PID 38600 nice -1 -> PID 69000 nice -2 -> PID 17200 nice -2 -> NULL
+Proceso 91500: nuevo tiempo de vida 6, nice -2
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 38600 nice -1 -> PID 91500 nice -2 -> PID 17200 nice -2 -> PID 69000 nice -2 -> NULL
+Proceso 78200: nuevo tiempo de vida 6, nice -2
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice -1
+PID 78200 nice -2 -> PID 69000 nice -2 -> PID 17200 nice -2 -> PID 91500 nice -2 -> NULL
+Proceso 38600: nuevo tiempo de vida 1, nice -2
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -2
+PID 38600 nice -2 -> PID 91500 nice -2 -> PID 17200 nice -2 -> PID 69000 nice -2 -> NULL
+Proceso 78200: nuevo tiempo de vida 5, nice -3
+Proceso 38600 asignado al CPU 0, core 0, thread 1 con nice -2
+PID 69000 nice -2 -> PID 17200 nice -2 -> PID 91500 nice -2 -> PID 78200 nice -3 -> NULL
+Proceso 38600 ha terminado
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -2
+PID 91500 nice -2 -> PID 17200 nice -2 -> PID 78200 nice -3 -> NULL
+Proceso 69000: nuevo tiempo de vida 13, nice -3
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -2
+PID 17200 nice -2 -> PID 69000 nice -3 -> PID 78200 nice -3 -> NULL
+Proceso 91500: nuevo tiempo de vida 5, nice -3
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -2
+PID 91500 nice -3 -> PID 78200 nice -3 -> PID 69000 nice -3 -> NULL
+Proceso 17200: nuevo tiempo de vida 12, nice -3
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -3
+PID 17200 nice -3 -> PID 69000 nice -3 -> PID 78200 nice -3 -> NULL
+Proceso 91500: nuevo tiempo de vida 4, nice -4
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -3
+PID 78200 nice -3 -> PID 69000 nice -3 -> PID 91500 nice -4 -> NULL
+Proceso 17200: nuevo tiempo de vida 11, nice -4
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -3
+PID 69000 nice -3 -> PID 17200 nice -4 -> PID 91500 nice -4 -> NULL
+Proceso 78200: nuevo tiempo de vida 4, nice -4
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -3
+PID 78200 nice -4 -> PID 91500 nice -4 -> PID 17200 nice -4 -> NULL
+Proceso 69000: nuevo tiempo de vida 12, nice -4
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -4
+PID 69000 nice -4 -> PID 17200 nice -4 -> PID 91500 nice -4 -> NULL
+Proceso 78200: nuevo tiempo de vida 3, nice -5
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -4
+PID 91500 nice -4 -> PID 17200 nice -4 -> PID 78200 nice -5 -> NULL
+Proceso 69000: nuevo tiempo de vida 11, nice -5
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -4
+PID 17200 nice -4 -> PID 69000 nice -5 -> PID 78200 nice -5 -> NULL
+Proceso 91500: nuevo tiempo de vida 3, nice -5
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -4
+PID 91500 nice -5 -> PID 78200 nice -5 -> PID 69000 nice -5 -> NULL
+Proceso 17200: nuevo tiempo de vida 10, nice -5
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -5
+PID 17200 nice -5 -> PID 69000 nice -5 -> PID 78200 nice -5 -> NULL
+Proceso 91500: nuevo tiempo de vida 2, nice -6
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -5
+PID 78200 nice -5 -> PID 69000 nice -5 -> PID 91500 nice -6 -> NULL
+Proceso 17200: nuevo tiempo de vida 9, nice -6
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -5
+PID 69000 nice -5 -> PID 17200 nice -6 -> PID 91500 nice -6 -> NULL
+Proceso 78200: nuevo tiempo de vida 2, nice -6
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -5
+PID 78200 nice -6 -> PID 91500 nice -6 -> PID 17200 nice -6 -> NULL
+Proceso 69000: nuevo tiempo de vida 10, nice -6
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -6
+PID 69000 nice -6 -> PID 17200 nice -6 -> PID 91500 nice -6 -> NULL
+Proceso 78200: nuevo tiempo de vida 1, nice -7
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -6
+PID 91500 nice -6 -> PID 17200 nice -6 -> PID 78200 nice -7 -> NULL
+Proceso 69000: nuevo tiempo de vida 9, nice -7
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -6
+PID 17200 nice -6 -> PID 69000 nice -7 -> PID 78200 nice -7 -> NULL
+Proceso 91500: nuevo tiempo de vida 1, nice -7
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -6
+PID 91500 nice -7 -> PID 78200 nice -7 -> PID 69000 nice -7 -> NULL
+Proceso 17200: nuevo tiempo de vida 8, nice -7
+Proceso 91500 asignado al CPU 0, core 0, thread 1 con nice -7
+PID 17200 nice -7 -> PID 69000 nice -7 -> PID 78200 nice -7 -> NULL
+Proceso 91500 ha terminado
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -7
+PID 78200 nice -7 -> PID 69000 nice -7 -> NULL
+Proceso 17200: nuevo tiempo de vida 7, nice -8
+Proceso 78200 asignado al CPU 0, core 0, thread 1 con nice -7
+PID 69000 nice -7 -> PID 17200 nice -8 -> NULL
+Proceso 78200 ha terminado
+Proceso 69000 asignado al CPU 0, core 0, thread 1 con nice -7
+PID 17200 nice -8 -> NULL
+Proceso 69000: nuevo tiempo de vida 8, nice -8
+Proceso 17200 asignado al CPU 0, core 0, thread 1 con nice -8
+PID 69000 nice -8 -> NULL
+Proceso 17200: nuevo

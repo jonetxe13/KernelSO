@@ -31,8 +31,8 @@ void ordenarColaProcesos(PCB **colaProcesos){
     if(colaProcesos == NULL){
         return;
     }
-    printf("cola antes de ordenar: \n");
-    imprimirColaProcesos(*colaProcesos);
+    // printf("cola antes de ordenar: \n");
+    // imprimirColaProcesos(*colaProcesos);
 
      while (*colaProcesos != NULL) { 
         PCB *minPrev = NULL; 
@@ -57,7 +57,7 @@ void ordenarColaProcesos(PCB **colaProcesos){
         sorted = minNode;
     }
     *colaProcesos = sorted;
-    printf("cola despues de ordenar: \n");
-    imprimirColaProcesos(*colaProcesos);
+    // printf("cola despues de ordenar: \n");
+    // imprimirColaProcesos(*colaProcesos);
 
 }

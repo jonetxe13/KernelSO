@@ -34,7 +34,7 @@ void roundRobin(int num_threads, Thread* threadArray) {
 
         if (threadArray[i].process.tiempoVida > quantum) {
             threadArray[i].process.tiempoVida -= quantum;
-            threadArray[i].process.nice -= quantum / 2;
+            threadArray[i].process.nice -= quantum / 2 + 1;
             printf("Proceso %d: nuevo tiempo de vida %d, nice %d\n", 
                    threadArray[i].process.pid, threadArray[i].process.tiempoVida, threadArray[i].process.nice);
 

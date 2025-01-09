@@ -11,18 +11,18 @@
 void inicializarMaquina(Machine *maquina, int num_cpus, int num_cores, int num_threads) {
     maquina->cpus = malloc(num_cpus * sizeof(CPU));
     for (int i = 0; i < num_cpus; i++) {
-        maquina.cpus[i].id = i + 1;
-        maquina.cpus[i].cores = malloc(num_cores * sizeof(Core));
+        maquina->cpus[i].id = i + 1;
+        maquina->cpus[i].cores = malloc(num_cores * sizeof(Core));
         printf("El id de CPU es: %d\n", i + 1);
         for (int j = 0; j < num_cores; j++) {
-            maquina.cpus[i].cores[j].id = j + 1;
-            maquina.cpus[i].cores[j].threads = malloc(num_threads * sizeof(Thread));
+            maquina->cpus[i].cores[j].id = j + 1;
+            maquina->cpus[i].cores[j].threads = malloc(num_threads * sizeof(Thread));
             printf("El id de core es: %d\n", j + 1);
             for (int k = 0; k < num_threads; k++) {
-                maquina.cpus[i].cores[j].threads[k].id = k + 1;
-                maquina.cpus[i].cores[j].threads[k].process.pid = 0;
-                maquina.cpus[i].cores[j].threads[k].process.tiempoVida = 0;
-                maquina.cpus[i].cores[j].threads[k].process.siguiente = NULL;
+                maquina->cpus[i].cores[j].threads[k].id = k + 1;
+                maquina->cpus[i].cores[j].threads[k].process.pid = 0;
+                maquina->cpus[i].cores[j].threads[k].process.tiempoVida = 0;
+                maquina->cpus[i].cores[j].threads[k].process.siguiente = NULL;
                 printf("El id de thread es: %d\n", k + 1);
             }
         }
@@ -33,11 +33,11 @@ void inicializarMaquina(Machine *maquina, int num_cpus, int num_cores, int num_t
 void liberarMaquina(Machine *maquina, int num_cpus, int num_cores) {
     for (int i = 0; i < num_cpus; i++) {
         for (int j = 0; j < num_cores; j++) {
-            free(maquina.cpus[i].cores[j].threads);
+            free(maquina->cpus[i].cores[j].threads);
         }
-        free(maquina.cpus[i].cores);
+        free(maquina->cpus[i].cores);
     }
-    free(maquina.cpus);
+    free(maquina->cpus);
 }
 
 int main(int argc, char** argv) {
